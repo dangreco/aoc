@@ -6,21 +6,16 @@ let overlap (a0, a1) (b0, b1) =
   let r = min a1 b1 in
   if r < l then 0 else r - l + 1
 
-let halve s ~on =
-  match String.split s ~on:on with
-  | a::b::[] -> Some((a, b))
-  | _ -> None 
+let parse_range s =
+  match String.split s ~on:'-' with
+  | [s; e] -> (Int.of_string s, Int.of_string e)
+  | _ -> failwith "Invalid range"
 ;;
 
 let parse line = 
-  let parsed = Option.map (halve line ~on:',') ~f:(Tuple2.map ~f:(fun e ->
-    Option.map (halve e ~on:'-') ~f:(Tuple2.map ~f:(int_of_string))
-  )) 
-  in
-  match parsed with
-  | Some((Some((a0, a1)), Some((b0, b1)))) -> ((a0, a1), (b0, b1))
-  | _ -> failwith "Invalid line"
-;;
+  match String.split line ~on:',' with
+  | [elf1; elf2] -> (parse_range elf1, parse_range elf2)
+  | _ -> failwith "Invalid range"
 
 let () =
   let input = Clap.mandatory_string () in
