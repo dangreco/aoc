@@ -14,9 +14,7 @@ tasks:
     silent: true
     requires:
       vars:
-        - name: YEAR
-          enum: ["2025"]
         - name: DAY
           enum: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     cmds:
-      - ( t=$(mktemp); elf input {{.YEAR}} {{.DAY}} | tee "$t" | runghc "day{{.DAY}}.hs"; rm "$t" )
+      - ( t=$(mktemp); elf input 2025 {{.DAY}} | tee "$t" | runghc "day{{.DAY}}.hs"; rm "$t" )

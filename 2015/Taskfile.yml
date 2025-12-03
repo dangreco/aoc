@@ -1,0 +1,47 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  default:
+    desc: List tasks
+    silent: true
+    cmds:
+      - task --list
+
+  run:
+    desc: Run solution
+    silent: true
+    requires:
+      vars:
+        - name: DAY
+          enum:
+            [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24",
+              "25",
+            ]
+    cmds:
+      - ( t=$(mktemp); elf input 2015 {{.DAY}} | tee "$t" | runghc "day{{.DAY}}.hs"; rm "$t" )
