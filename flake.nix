@@ -39,7 +39,11 @@
                 sops
                 go-task
 
-                haskell.compiler.ghc96
+                (haskell.packages.ghc96.ghcWithPackages (
+                  hs: with hs; [
+                    MissingH
+                  ]
+                ))
                 haskell.packages.ghc96.haskell-language-server
 
                 (pkgs.python3.withPackages (ps: [
