@@ -42,6 +42,7 @@
                 (haskell.packages.ghc96.ghcWithPackages (
                   hs: with hs; [
                     MissingH
+                    vector
                   ]
                 ))
                 haskell.packages.ghc96.haskell-language-server
